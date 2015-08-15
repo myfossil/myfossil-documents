@@ -10,9 +10,11 @@ Author: MyFossil
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-if ( ! is_admin() )
+if ( ! is_admin() ) {
 	include_once( dirname( __FILE__ ) . '/mf_documents_templates.php' );
-	
+	include_once( dirname( __FILE__ ) . '/mf_documents_functions.php' );
+}
+
 
 function mf_documents_activation() {
 

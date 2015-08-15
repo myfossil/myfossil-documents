@@ -3,7 +3,7 @@
 /**
  * Template for displaying the Events Loop
  * You can copy this file to your-theme
- * and then edit the layout. 
+ * and then edit the layout.
  */
 
 get_header();
@@ -20,68 +20,85 @@ $args = array(
 $wp_query = new WP_Query( $args );
 ?>
 
-<div id="buddypress" class="container page-styling site-main" role="main">
-documents-loop.php template loaded from myfossil-documents plugin
 
-	<h2 class="entry-title">All Documents</h2>
 
-	<div>   
-	    <h3>Search Documents</h3>
-	    <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
-	    <input type="text" name="s" placeholder="Search Documents"/>
-	    <input type="hidden" name="post_type" value="myfossil_document" /> <!-- // hidden 'products' value -->
-	    <input type="submit" alt="Search" value="Search" />
-	  </form>
-	</div>	
-	
-	<?php if ( $wp_query->have_posts() ) : ?>
+	<div class="container container-no-padding page-styling no-border-top">
+		documents-loop.php template loaded from myfossil-documents plugin
 
-		<div class="entry-content"><br/>
-			<?php //echo mf_pagination( $wp_query ); // use existing function for pagination? ?>
+
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 sidebar sidebar-right page-padding pull-right">
+
+			<div>
+			    <h3>Search Documents</h3>
+			    <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
+			        <input type="text" name="s" placeholder="Search Documents"/>
+			        <input type="hidden" name="post_type" value="myfossil_document" />
+			        <input type="submit" alt="Search" value="Search" />
+				</form>
+			</div>
+
+			<br/>&nbsp;<br/>
+
+			<div>
+				<h3>Categories</h3>
+				<?php echo mf_documents_cats_list(); ?>
+			</div>
+
 		</div>
 
-		<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); 	?>
 
-			<div class="entry-content">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 page-padding next-to-right-sidebar">
 
-				<h4 class="entry-title">
-					<a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>">
-					<?php the_title(); ?></a>
-				</h4>
+			<h2 class="entry-title">All Documents</h2>
 
-				<?php the_excerpt(); ?>
+			<?php if ( $wp_query->have_posts() ) : ?>
 
+				<div class="entry-content"><br/>
+					<?php //echo mf_pagination( $wp_query ); // use some existing function for pagination? ?>
+				</div>
 
-				<?php
-				if ( has_post_thumbnail() ) {
-					the_post_thumbnail( 'thumbnail' );
-					echo '<br/>';
-				}
-				?>
+				<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); 	?>
 
+					<div class="entry-content">
 
+						<h4 class="entry-title">
+							<a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>">
+							<?php the_title(); ?></a>
+						</h4>
 
-				<br/>
-				Category: <?php the_category(', ') ?>
+						<?php the_excerpt(); ?>
 
 
-			</div><!-- .entry-content -->
+						<?php
+						if ( has_post_thumbnail() ) {
+							the_post_thumbnail( 'thumbnail' );
+							echo '<br/>';
+						}
+						?>
 
-	<?php endwhile; ?>
+						<br/>
+						Category: <?php the_category(', ') ?>
 
-	<div class="entry-content"><br/>
-		<?php //echo mf_pagination( $wp_query ); ?>
+
+					</div><!-- .entry-content -->
+
+			<?php endwhile; ?>
+
+			<div class="entry-content"><br/>
+				<?php //echo mf_pagination( $wp_query ); ?>
+			</div>
+
+			<?php else : ?>
+
+				<div class="entry-content"><br/>There are no Documents.</div>
+
+			<?php endif; ?>
+
+
+			<?php wp_reset_postdata(); ?>
+
+		</div>
 	</div>
 
-	<?php else : ?>
-
-		<div class="entry-content"><br/>There are no Documents.</div>
-
-	<?php endif; ?>
-
-
-	<?php wp_reset_postdata(); ?>
-
-</div><!-- #primary -->
 
 <?php get_footer(); ?>

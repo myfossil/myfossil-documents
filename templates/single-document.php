@@ -1,12 +1,12 @@
 <?php
 
- /** 
+ /**
  * Template for displaying a single Document
  * You can copy this file to your theme
  * and then edit the layout.
  */
 
-get_header(); 
+get_header();
 ?>
 
 <div id="buddypress" class="container page-styling site-main" role="main">
