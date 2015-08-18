@@ -18,11 +18,13 @@ if ( ! is_admin() ) {
 
 function mf_documents_activation() {
 
-	mf_add_document_caps();
+	mf_add_documents_caps();
 
 	mf_create_post_type_document();
 
 	mf_create_documents_page();
+
+	mf_create_misc_category();
 
 	flush_rewrite_rules();
 
@@ -31,7 +33,7 @@ register_activation_hook(__FILE__, 'mf_documents_activation');
 
 
 function mf_documents_deactivation () {
-	mf_remove_document_caps();
+	mf_remove_documents_caps();
 }
 register_deactivation_hook(__FILE__, 'mf_documents_deactivation');
 
@@ -59,6 +61,36 @@ function mf_create_documents_page() {
     }
 
 }
+
+function mf_create_misc_category() {
+
+	if( !term_exists('misc') ) {
+		wp_insert_term(
+			'Misc',
+			'category',
+			array(
+			  'description'	=> 'Miscellaneous',
+			  'slug' 		=> 'misc'
+			)
+		);
+	}
+}
+
+
+function mf_document_set_default_category( $post_id, $post, $update ) {
+
+	$slug = 'myfossil_document';
+
+	if ( $slug != $post->post_type )
+		return;
+
+	$terms = wp_get_post_terms( $post_id, 'category');
+
+	if( !$terms || in_array(1, $terms) )
+		wp_set_object_terms( $post_id, 'misc', 'category' );
+
+}
+add_action( 'save_post', 'mf_document_set_default_category', 15, 3 );
 
 
 function mf_create_post_type_document() {
@@ -91,13 +123,13 @@ function mf_create_post_type_document() {
 		'taxonomies' => array('category'),
 		)
 	);
-	register_taxonomy_for_object_type('category', 'document');
+	//register_taxonomy_for_object_type('category', 'document');
 
 }
 add_action( 'init', 'mf_create_post_type_document' );
 
 
-function mf_add_document_caps() {
+function mf_add_documents_caps() {
 
 	$role = get_role( 'administrator' );
 	$role->add_cap( 'delete_published_documents' );

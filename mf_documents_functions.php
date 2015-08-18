@@ -11,7 +11,7 @@ function mf_documents_query_post_type($query) {
 		if($post_type)
 			$post_type = $post_type;
 		else
-			$post_type = array( 'myfossil_document', 'nav_menu_item');
+			$post_type = array( 'post', 'myfossil_document', 'nav_menu_item');
 
 		$query->set('post_type',$post_type);
 		return $query;
@@ -39,7 +39,7 @@ function mf_documents_cats_list() {
 		'pad_counts'               => 1
 	);
 
-	$categories=get_categories($args_types);
+	$categories = get_categories($args_types);
 
 	foreach($categories as $category) {
 
