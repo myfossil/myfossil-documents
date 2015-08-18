@@ -53,7 +53,7 @@ $wp_query = new WP_Query( $args );
 
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 page-padding next-to-right-sidebar">
 
-			<h2 class="entry-title">All Documents</h2>
+			<h1 class="entry-title">All Documents</h1>
 
 			<?php if ( $wp_query->have_posts() ) : ?>
 
