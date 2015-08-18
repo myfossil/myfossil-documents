@@ -51,7 +51,6 @@ get_header();
 			?>
 		<div class="entry-content">
 			<?php the_content(); ?>
-			treś jakaś tam bla bla hejże hola dsjksdjksdkjsd sdkjsdsdkj skjsdjksd skjdskjsd sdkjdsds
 		</div>
 			<br/>
 		
