@@ -1,15 +1,10 @@
-
-
-
 <?php
 
 /**
- * Template for displaying the Events Loop
+ * Template for displaying the Dcouments Loop
  * You can copy this file to your-theme
  * and then edit the layout.
  */
-
-
 
 get_header();
 
@@ -17,7 +12,7 @@ $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
 $args = array(
 	'post_type'      => 'myfossil_document',
-	'order'          => 'ASC',
+	'order'          => 'DESC',
 	'paged'          => $paged,
 	'posts_per_page' => 10,
 );
@@ -25,11 +20,7 @@ $args = array(
 $wp_query = new WP_Query( $args );
 ?>
 
-
-
 	<div class="container documents-container container-no-padding page-styling no-border-top">
-		
-
 
 		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 sidebar sidebar-right page-padding pull-right">
 
@@ -41,8 +32,6 @@ $wp_query = new WP_Query( $args );
 			        <input type="submit" alt="Search" value="Search" />
 				</form>
 			</div>
-
-			
 
 			<div>
 				<h3>Categories</h3>
@@ -58,7 +47,7 @@ $wp_query = new WP_Query( $args );
 			<?php if ( $wp_query->have_posts() ) : ?>
 
 				<div class=""><br/>
-					<?php //echo mf_pagination( $wp_query ); // use some existing function for pagination? ?>
+					<?php myfossil_paging_nav(); ?>
 				</div>
 
 				<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); 	?>
@@ -89,12 +78,12 @@ $wp_query = new WP_Query( $args );
 			<?php endwhile; ?>
 
 			<div class=""><br/>
-				<?php //echo mf_pagination( $wp_query ); ?>
+				<?php myfossil_paging_nav(); ?>
 			</div>
 
 			<?php else : ?>
 
-				<div class="entry-content"><br/>There are no Documents.</div>
+				<?php get_template_part('content', 'none'); ?>
 
 			<?php endif; ?>
 
@@ -104,5 +93,11 @@ $wp_query = new WP_Query( $args );
 		</div>
 	</div>
 
+<script type="text/javascript">
+jQuery(document).ready(function($) { 
+	if (window.location.search.indexOf('mfs=1') > -1)
+		jQuery('#s').focus(); 
+});
+</script>	
 
 <?php get_footer(); ?>

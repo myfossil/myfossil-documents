@@ -11,7 +11,7 @@ function mf_documents_query_post_type($query) {
 		if($post_type)
 			$post_type = $post_type;
 		else
-			$post_type = array( 'myfossil_document');
+			$post_type = array( 'myfossil_document', 'nav_menu_item');
 
 		$query->set('post_type',$post_type);
 		return $query;
