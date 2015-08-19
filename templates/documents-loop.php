@@ -27,9 +27,9 @@ $wp_query = new WP_Query( $args );
 			<div>
 			    <h3>Search Documents</h3>
 			    <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
-			        <input type="text" id="s" name="s" placeholder="Search Documents"/>
+			        <input type="text" class="form-control" id="s" name="s" placeholder="Search Documents"/>
 			        <input type="hidden" name="post_type" value="myfossil_document" />
-			        <input type="submit" class="btn btn-default btn-sm" alt="Search" value="Search" />
+			        <input type="submit" class="btn btn-default" alt="Search" value="Search" />
 				</form>
 			</div>
 
