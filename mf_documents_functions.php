@@ -20,7 +20,7 @@ function mf_documents_query_post_type($query) {
 }
 add_filter('pre_get_posts', 'mf_documents_query_post_type');
 
-
+// show list of categories on documents loop
 function mf_documents_cats_list() {
 
 	$cat_str = '';
