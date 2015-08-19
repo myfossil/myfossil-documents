@@ -32,7 +32,7 @@ function mf_documents_cats_list() {
 		'order'                    => 'ASC',
 		'hide_empty'               => 1,
 		'hierarchical'             => 0,
-		'exclude'                  => '',
+		'exclude'                  => 1,
 		'include'                  => '',
 		'number'                   => '',
 		'taxonomy'                 => 'category',
