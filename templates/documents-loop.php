@@ -29,7 +29,9 @@ $wp_query = new WP_Query( $args );
 			    <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
 			        <input type="text" class="form-control" id="s" name="s" placeholder="Search Documents"/>
 			        <input type="hidden" name="post_type" value="myfossil_document" />
-			        <input type="submit" class="btn btn-default" alt="Search" value="Search" />
+			           <button class="btn btn-primary btn-search" type="submit" role="button" ><span class="fa-stack">                        
+                                <i class="fa fa-search fa-stack-1x fa-inverse"></i>
+                            </span>Search documents <span class="caret"></span></button>
 				</form>
 			</div>
 
