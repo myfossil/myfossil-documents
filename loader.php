@@ -84,13 +84,14 @@ function mf_document_set_default_category( $post_id, $post, $update ) {
 	if ( $slug != $post->post_type )
 		return;
 
-	$terms = wp_get_post_terms( $post_id, 'category');
+	$terms_list = wp_get_post_terms( $post_id, 'category', array("fields" => "name"));
 
-	if( !$terms || in_array(1, $terms) )
+	//if( in_array('Uncategorized', $terms_list) )
+	if( empty( $terms_list ) )
 		wp_set_object_terms( $post_id, 'misc', 'category' );
 
 }
-add_action( 'save_post', 'mf_document_set_default_category', 15, 3 );
+//add_action( 'save_post', 'mf_document_set_default_category', 99, 3 );
 
 
 function mf_create_post_type_document() {
@@ -125,6 +126,10 @@ function mf_create_post_type_document() {
 	);
 	//register_taxonomy_for_object_type('category', 'document');
 
+	//$term_list = wp_get_post_terms(1910, 'category', array("fields" => "names"));
+	//var_dump( $term_list );
+	//if( in_array('Uncategorized', $term_list) )  echo '........in array';
+	//if( empty( $term_list) )  echo '........empty';
 }
 add_action( 'init', 'mf_create_post_type_document' );
 
